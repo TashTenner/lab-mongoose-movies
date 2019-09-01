@@ -1,19 +1,15 @@
 <h2>Celebrities</h2>
 <ul>
   {{#each celebrities}}
-  {{#if @first}}
-  <li><b><a href="/celebrities/{{this._id}}">{{ this.name }} </a> </b></li>
-  {{else if @last}}
-  <li><b><a href="/celebrities/{{this._id}}">{{ this.name }} </a> </b></li>
-  {{else}}
   <li><a href="/celebrities/{{this._id}}">{{ this.name }} </a> </li>
-  {{/if}}
+  <form action="/celebrities/{{this._id}}/delete" method="POST">
+    {{!-- <input type="submit" value="delete"> del ejemplo de Thor pero no funciona --}}
+    <button type="submit">DELETE</button>
+  </form>
+  <br>
   {{/each}}
 </ul>
 <a href="/celebrities/new">Add new celebrity</a>
-
-
-
 
 
 {{!-- <!DOCTYPE html>

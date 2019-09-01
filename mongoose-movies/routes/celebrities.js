@@ -57,4 +57,13 @@ router.post("/", (req, res) => {
     });
 });
 
+router.post("/:celebrityId/delete", (req, res, next) => {
+  const { celebrityId } = req.params;
+  Celebrity.findByIdAndDelete(celebrityId)
+    .then(() => {
+      res.redirect("celebrities");
+    })
+    .catch(next);
+});
+
 module.exports = router;
