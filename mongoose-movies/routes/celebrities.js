@@ -66,4 +66,28 @@ router.post("/:celebrityId/delete", (req, res, next) => {
     .catch(next);
 });
 
+router.get("/:celebrityId/edit", (req, res, next) => {
+  const { celebrityId } = req.params;
+  Celebrity.findById(celebrityId)
+    .then(celebrity => {
+      res.render("celebrities/edit", { celebrity });
+    })
+    .catch(next);
+});
+
+router.post("/:celebrityId", (req, res, next) => {
+  console.log("hola1");
+  const { celebrityId } = req.params;
+  const { name, occupation, catchPhrase } = req.body;
+  Celebrity.update(
+    { _id: celebrityId },
+    { $set: { name, occupation, catchPhrase } },
+    { new: true }
+  )
+    .then(() => {
+      res.redirect(`/celebrities/${celebrityId}`);
+    })
+    .catch(next);
+});
+
 module.exports = router;
